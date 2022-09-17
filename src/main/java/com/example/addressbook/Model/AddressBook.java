@@ -16,6 +16,15 @@ public class AddressBook {
 
     }
 
+    public AddressBook(AddressBook addressBook,Integer id) {
+
+    }
+
+    public AddressBook(AddressBook addressBook) {
+
+    }
+
+
     public Integer getId() {
         return id;
     }
