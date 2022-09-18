@@ -1,5 +1,7 @@
 package com.example.addressbook.Model;
 
+import com.example.addressbook.DTO.AddressBookDto;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,16 +13,25 @@ public class AddressBook {
     public Integer id;
     public String name;
     public String city;
+  public String zip;
+    public AddressBook(AddressBookDto addressBookDto) {
+this.name=addressBookDto.getName();
+this.city=addressBookDto.getCity();
+this.zip=addressBookDto.getZip();
+    }
+
+    public AddressBook(AddressBook addressBook,Integer id) {
+        this.id = id;
+        this.name = addressBook.name;
+        this.city = addressBook.city;
+        this.zip= addressBook.zip;
+    }
 
     public AddressBook() {
 
     }
 
-    public AddressBook(AddressBook addressBook,Integer id) {
-
-    }
-
-    public AddressBook(AddressBook addressBook) {
+    public AddressBook(AddressBookDto addressBookDTO, Integer id) {
 
     }
 
@@ -49,9 +60,26 @@ public class AddressBook {
         this.city = city;
     }
 
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
     public AddressBook(Integer id, String name, String city) {
         this.id = id;
         this.name = name;
         this.city = city;
+    }
+
+    @Override
+    public String toString() {
+        return "AddressBook{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", city='" + city + '\'' +
+                '}';
     }
 }
