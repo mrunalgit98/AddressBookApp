@@ -4,7 +4,6 @@ package com.example.addressbook.Service;
 import com.example.addressbook.DTO.AddressBookDto;
 import com.example.addressbook.Model.AddressBook;
 import com.example.addressbook.Repository.AddressbookRepository;
-import org.apache.catalina.LifecycleState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +20,10 @@ public class AddressBookService implements IAddress {
 
 
     @Override
-    public String Add(AddressBookDto addressBookDto) {
+    public AddressBook Add(AddressBookDto addressBookDto) {
         AddressBook addressBook=new AddressBook(addressBookDto);
         repository.save(addressBook);
-        return addressBook.toString();
+        return addressBook;
     }
     //Created service method which serves controller api to retrieve all records
     public Optional<AddressBook> getIdOfAddresses(int id) {

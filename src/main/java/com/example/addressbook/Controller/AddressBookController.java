@@ -34,7 +34,7 @@ public class AddressBookController {
 
     @PostMapping("/add")
     public ResponseEntity<ResponseDto> postData(@RequestBody AddressBookDto addressBook) {
-        String  newContact = service.Add(addressBook);
+         service.Add(addressBook);
         ResponseDto response = new ResponseDto("New Contact Added in Addressbook : ", addressBook);
         return new ResponseEntity<ResponseDto>(response, HttpStatus.OK);
     }
