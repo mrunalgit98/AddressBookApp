@@ -18,5 +18,7 @@ public interface IAddress {
 
     List<AddressBook> getContactsByCity(String city);
 
-//    List<AddressBook> orderContactsByCity();
+   List<AddressBook> orderContactsByCity();
+
+
 }

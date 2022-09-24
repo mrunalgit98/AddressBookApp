@@ -66,9 +66,13 @@ public class AddressBookService implements IAddress {
         }
         return addressBooks;
     }
-//    @Override
-//    public List<AddressBook> orderContactsByCity() {
-//        return repository.orderContactsByCity();
-//
-//    }
+
+
+
+    @Override
+    public List<AddressBook> orderContactsByCity() {
+         List<AddressBook>addressbook=repository.orderContactsByCity();
+         return addressbook;
+
+    }
 }

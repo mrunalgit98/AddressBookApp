@@ -10,6 +10,6 @@ import java.util.List;
 public interface AddressbookRepository extends JpaRepository<AddressBook,Integer> {
     List<AddressBook> findContactByCity(String city);
 
-//    @Query(value = "SELECT * FROM addressbookdto.address_book_city order by city;",nativeQuery = true)
-//    List<AddressBook> orderContactsByCity();
+   @Query(value = "SELECT * FROM addressbookdto.address_book order by city;",nativeQuery = true)
+   List<AddressBook> orderContactsByCity();
 }

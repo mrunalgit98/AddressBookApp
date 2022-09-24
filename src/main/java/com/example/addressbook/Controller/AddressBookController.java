@@ -70,10 +70,10 @@ public class AddressBookController {
         ResponseDto responseDTO = new ResponseDto("Get Call For ID Department Successful",addressBookList);
         return new ResponseEntity<>(responseDTO,HttpStatus.OK);
     }
-//    @GetMapping(value = {"/city1"})
-//    public ResponseEntity<ResponseDto> orderContactsByCity() {
-//        List<AddressBook> addressBookList = service.orderContactsByCity();
-//        ResponseDto responseDTO = new ResponseDto("Contact details sorted by City", addressBookList);
-//        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
-//    }
+    @GetMapping(value = {"/city1"})
+    public ResponseEntity<ResponseDto> orderContactsByCity() {
+        List<AddressBook> addressBookList = service.orderContactsByCity();
+        ResponseDto responseDTO = new ResponseDto("Contact details sorted by City", addressBookList);
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+    }
 }
