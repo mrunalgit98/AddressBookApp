@@ -44,7 +44,7 @@ public class AddressBookController {
 
     @GetMapping("/get/{id}")
     public ResponseEntity<AddressBookDto> getAddressById(@PathVariable Integer id) {
-       Optional<AddressBook> addressBook= service.getIdOfAddresses(id);
+       Optional<AddressBook> addressBook=   service.getIdOfAddresses(id);
         ResponseDto response = new ResponseDto("Addressbook of given id: ", addressBook);
         return new ResponseEntity(response, HttpStatus.OK);
     }

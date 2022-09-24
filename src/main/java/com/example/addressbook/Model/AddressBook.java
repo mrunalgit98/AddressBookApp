@@ -24,7 +24,7 @@ public class AddressBook {
     public String city;
     public Integer zip;
 
-//   public Long phone;
+   public Long phone;
 
 
 
@@ -33,7 +33,7 @@ public class AddressBook {
         this.name=addressBookDto.name;
         this.city=addressBookDto.city;
         this.zip=addressBookDto.zip;
-//        this.phone=addressBookDto.phone;
+        this.phone=addressBookDto.phone;
 
     }
 }
