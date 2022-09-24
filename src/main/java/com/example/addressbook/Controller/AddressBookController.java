@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,7 +35,7 @@ public class AddressBookController {
 
 
     @PostMapping("/add")
-    public ResponseEntity<ResponseDto> postData(@RequestBody AddressBookDto addressBook) {
+    public ResponseEntity<ResponseDto> postData(@Valid @RequestBody AddressBookDto addressBook) {
          service.Add(addressBook);
         ResponseDto response = new ResponseDto("New Contact Added in Addressbook : ", addressBook);
         return new ResponseEntity<ResponseDto>(response, HttpStatus.OK);
@@ -41,7 +43,7 @@ public class AddressBookController {
 
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<AddressBookDto> getAddressById(@PathVariable int id) {
+    public ResponseEntity<AddressBookDto> getAddressById(@PathVariable Integer id) {
        Optional<AddressBook> addressBook= service.getIdOfAddresses(id);
         ResponseDto response = new ResponseDto("Addressbook of given id: ", addressBook);
         return new ResponseEntity(response, HttpStatus.OK);
@@ -49,7 +51,7 @@ public class AddressBookController {
 
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<ResponseDto> updateById(@PathVariable Integer id, @RequestBody AddressBookDto addressBookDTO) {
+    public ResponseEntity<ResponseDto> updateById(@PathVariable Integer id, @RequestBody@Valid AddressBookDto addressBookDTO) {
         AddressBook newContact = service.updateById(id, addressBookDTO);
         ResponseDto response = new ResponseDto("Address-book updated : ", newContact);
         return new ResponseEntity<ResponseDto>(response, HttpStatus.OK);
