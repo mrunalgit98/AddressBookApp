@@ -6,6 +6,7 @@ import lombok.ToString;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.List;
 
 @Data
 
@@ -16,7 +17,7 @@ public class AddressBookDto {
     @NotNull(message = "zip cannot be empty")
     public Integer zip;
     @NotEmpty(message = "city cannot be empty")
-     public String city;
+     public List<String> city;
 //    @Pattern(regexp ="(91-)?[0-9]{10}",message="Phone number is not valid")
      public Long phone;
 

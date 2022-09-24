@@ -17,4 +17,6 @@ public interface IAddress {
      void deleteContact(Integer id);
 
     List<AddressBook> getContactsByCity(String city);
+
+    List<AddressBook> orderContactsByCity();
 }

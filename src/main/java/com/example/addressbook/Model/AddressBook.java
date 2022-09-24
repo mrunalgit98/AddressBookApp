@@ -7,9 +7,12 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.intellij.lang.annotations.Pattern;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.List;
+
 @Data
 @Entity
 @AllArgsConstructor
@@ -21,7 +24,8 @@ public class AddressBook {
     public Integer id;
 
     public String name;
-    public String city;
+    @ElementCollection
+    public List<String> city;
     public Integer zip;
 
    public Long phone;
