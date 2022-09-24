@@ -68,12 +68,12 @@ public class AddressBookController {
         List<AddressBook> addressBookList ;
         addressBookList = service.getContactsByCity(city);
         ResponseDto responseDTO = new ResponseDto("Get Call For ID Department Successful",addressBookList);
-        return new ResponseEntity<ResponseDto>(responseDTO,HttpStatus.OK);
+        return new ResponseEntity<>(responseDTO,HttpStatus.OK);
     }
-    @GetMapping(value = {"/city"})
-    public ResponseEntity<ResponseDto> orderContactsByCity() {
-        List<AddressBook> addressBookList = service.orderContactsByCity();
-        ResponseDto responseDTO = new ResponseDto("Contact details sorted by City!!!", addressBookList);
-        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
-    }
+//    @GetMapping(value = {"/city1"})
+//    public ResponseEntity<ResponseDto> orderContactsByCity() {
+//        List<AddressBook> addressBookList = service.orderContactsByCity();
+//        ResponseDto responseDTO = new ResponseDto("Contact details sorted by City", addressBookList);
+//        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+//    }
 }

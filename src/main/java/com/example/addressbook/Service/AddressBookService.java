@@ -59,11 +59,16 @@ public class AddressBookService implements IAddress {
     }
     @Override
     public List<AddressBook> getContactsByCity(String city) {
-        return repository.findContactByCity((city));
-    }
-    @Override
-    public List<AddressBook> orderContactsByCity() {
-        return repository.orderContactsByCity();
+        List<AddressBook>addressBooks=repository.findContactByCity(city);
+        if (addressBooks.isEmpty()){
 
+            throw new AddressExceptionMessage("City not Found");
+        }
+        return addressBooks;
     }
+//    @Override
+//    public List<AddressBook> orderContactsByCity() {
+//        return repository.orderContactsByCity();
+//
+//    }
 }

@@ -17,8 +17,9 @@ public class AddressBookDto {
     @NotNull(message = "zip cannot be empty")
     public Integer zip;
     @NotEmpty(message = "city cannot be empty")
-     public List<String> city;
+     public String city;
 //    @Pattern(regexp ="(91-)?[0-9]{10}",message="Phone number is not valid")
      public Long phone;
+     public String email;
 
 }
