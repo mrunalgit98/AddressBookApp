@@ -62,4 +62,12 @@ public class AddressBookController {
         service.deleteContact(id);
         return new ResponseEntity<String>("Contact deleted successfully", HttpStatus.OK);
     }
+
+    @GetMapping("/city/{city}")
+    public ResponseEntity<ResponseDto> getContactsByCity(@PathVariable("city") String city){
+        List<AddressBook> addressBookList ;
+        addressBookList = service.getContactsByCity(city);
+        ResponseDto responseDTO = new ResponseDto("Get Call For ID Department Successful",addressBookList);
+        return new ResponseEntity<ResponseDto>(responseDTO,HttpStatus.OK);
+    }
 }

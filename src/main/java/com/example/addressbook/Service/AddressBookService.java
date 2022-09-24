@@ -33,6 +33,7 @@ public class AddressBookService implements IAddress {
                 .orElseThrow(() -> new AddressExceptionMessage("Person not found")));
     }
 //Created service to get all user
+    @Override
     public List<AddressBook>getListOfAddresses(){
         List<AddressBook>addressBook=repository.findAll();
         return addressBook;
@@ -55,5 +56,9 @@ public class AddressBookService implements IAddress {
     //Created service method which serves controller api to delete record by id
     public void deleteContact(Integer id) {
         repository.deleteById(id);
+    }
+    @Override
+    public List<AddressBook> getContactsByCity(String city) {
+        return repository.findContactByCity((city));
     }
 }
