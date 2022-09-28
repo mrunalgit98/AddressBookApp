@@ -6,6 +6,7 @@ import com.example.addressbook.DTO.ResponseDto;
 import com.example.addressbook.Model.AddressBook;
 import com.example.addressbook.Repository.AddressbookRepository;
 import com.example.addressbook.Service.AddressBookService;
+import com.example.addressbook.Service.IAddress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ import java.util.Optional;
 public class AddressBookController {
 
     @Autowired
-    AddressBookService service;
+    IAddress service;
 
     @GetMapping("/hello")
     public String getMessage() {
@@ -36,7 +37,7 @@ public class AddressBookController {
 
     @PostMapping("/add")
     public ResponseEntity<ResponseDto> postData(@Valid @RequestBody AddressBookDto addressBook) {
-         service.Add(addressBook);
+        service.Add(addressBook);
         ResponseDto response = new ResponseDto("New Contact Added in Addressbook : ", addressBook);
         return new ResponseEntity<ResponseDto>(response, HttpStatus.OK);
     }
@@ -44,16 +45,16 @@ public class AddressBookController {
 
     @GetMapping("/get/{id}")
     public ResponseEntity<AddressBookDto> getAddressById(@PathVariable Integer id) {
-       Optional<AddressBook> addressBook=   service.getIdOfAddresses(id);
+        AddressBook addressBook=   service.getIdOfAddresses(id);
         ResponseDto response = new ResponseDto("Addressbook of given id: ", addressBook);
         return new ResponseEntity(response, HttpStatus.OK);
     }
 
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<ResponseDto> updateById(@PathVariable Integer id, @RequestBody@Valid AddressBookDto addressBookDTO) {
-        AddressBook newContact = service.updateById(id, addressBookDTO);
-        ResponseDto response = new ResponseDto("Address-book updated : ", newContact);
+    public ResponseEntity<ResponseDto> updateById(@PathVariable Integer id,@Valid @RequestBody  AddressBookDto addressBookDTO) {
+//        AddressBook newContact = (AddressBook) service.updateAddressBookData(id, addressBookDTO);
+        ResponseDto response = new ResponseDto("Address-book updated : ", service.updateAddressBookData(id, addressBookDTO));
         return new ResponseEntity<ResponseDto>(response, HttpStatus.OK);
     }
 
@@ -75,5 +76,11 @@ public class AddressBookController {
         List<AddressBook> addressBookList = service.orderContactsByCity();
         ResponseDto responseDTO = new ResponseDto("Contact details sorted by City", addressBookList);
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+    }
+    @GetMapping(value = {"/state"})
+    public ResponseEntity<ResponseDto>orderContactByState(){
+        List<AddressBook>addressBooks=service.orderContactByState();
+        ResponseDto responseDto=new ResponseDto("Contact sorted by State",addressBooks);
+        return new ResponseEntity<>(responseDto,HttpStatus.OK);
     }
 }

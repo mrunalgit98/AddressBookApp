@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AddressBookService implements IAddress {
@@ -22,40 +21,53 @@ public class AddressBookService implements IAddress {
 
     @Override
     public AddressBook Add(AddressBookDto addressBookDto) {
-        AddressBook addressBook=new AddressBook(addressBookDto);
-        repository.save(addressBook);
-        return addressBook;
+        List<AddressBook> addressBook=repository.findAll();
+     for (AddressBook addressBook1 :addressBook){
+         if (addressBook1.getName().equals(addressBookDto.getName())){
+         throw (new AddressExceptionMessage("Name already exist please enter different name"));
+     }
     }
-    //Created service method which serves controller api to retrieve all records
-    public Optional<AddressBook> getIdOfAddresses(int id) {
+     AddressBook addressBook2=new AddressBook(addressBookDto);
+     repository.save(addressBook2);
+     return addressBook2;
+    }
+    //Created service method whi
+    // ch serves controller api to retrieve all records
+    @Override
+    public AddressBook getIdOfAddresses(int id) {
 
-        return Optional.ofNullable(repository.findById(id)
-                .orElseThrow(() -> new AddressExceptionMessage("Person not found")));
+        return repository.findById(id)
+                .orElseThrow(() -> new AddressExceptionMessage("Person not found"));
     }
-//Created service to get all user
+    //Created service to get all user
     @Override
     public List<AddressBook>getListOfAddresses(){
         List<AddressBook>addressBook=repository.findAll();
         return addressBook;
     }
 
-    //Created service method which serves controller api to update record by id
-    public AddressBook updateById(Integer id, AddressBookDto addressBookDTO) {
-        Optional<AddressBook>addressBook=repository.findById(id);
-        if(addressBook.isPresent()){
-            addressBook.get().setName(addressBookDTO.getName());
-            addressBook.get().setCity(addressBookDTO.getCity());
-            addressBook.get().setZip(addressBookDTO.getZip());
-            repository.save(addressBook.get());
-            return addressBook.get();
-        }else {
-            return null;
-        }
-    }
+    @Override
+    public Object updateAddressBookData(int id, AddressBookDto addressBookDTO) {
+       if(repository.findById(id).isPresent()){
+           List<AddressBook> addressBooks =repository.findAll();
+            for (AddressBook u :addressBooks){
+                if(u.getName().equals(addressBookDTO.getName())){
+                    return "name already present";
+                }
+            }
+        }else throw (new AddressExceptionMessage("id " + id + " not found"));
 
+          AddressBook addressBookData=new AddressBook(addressBookDTO);
+          addressBookData.setPersonId(id);
+        repository.save(addressBookData);
+        return addressBookData;
+        }
     //Created service method which serves controller api to delete record by id
-    public void deleteContact(Integer id) {
-        repository.deleteById(id);
+    public String deleteContact(Integer id) {
+        if(repository.findById(id).isPresent()){
+            repository.deleteById(id);
+            return "id" + id + " has been deleted";
+        }else throw (new AddressExceptionMessage("id " + id + " not found"));
     }
     @Override
     public List<AddressBook> getContactsByCity(String city) {
@@ -67,12 +79,18 @@ public class AddressBookService implements IAddress {
         return addressBooks;
     }
 
+    //Created service method which serves controller api to order record by city
 
 
     @Override
     public List<AddressBook> orderContactsByCity() {
-         List<AddressBook>addressbook=repository.orderContactsByCity();
-         return addressbook;
+        List<AddressBook>addressbook=repository.orderContactsByCity();
+        return addressbook;
 
+    }
+    @Override
+    public List<AddressBook>orderContactByState(){
+        List<AddressBook>addressBooks=repository.orderContactsByState();
+        return addressBooks;
     }
 }

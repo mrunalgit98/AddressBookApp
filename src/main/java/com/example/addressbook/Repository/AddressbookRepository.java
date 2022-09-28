@@ -12,4 +12,7 @@ public interface AddressbookRepository extends JpaRepository<AddressBook,Integer
 
    @Query(value = "SELECT * FROM addressbookdto.address_book order by city;",nativeQuery = true)
    List<AddressBook> orderContactsByCity();
+
+   @Query(value = "SELECT * FROM addressbookdto.address_book order by state",nativeQuery = true)
+   List<AddressBook>orderContactsByState();
 }

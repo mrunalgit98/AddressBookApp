@@ -11,14 +11,15 @@ public interface IAddress {
 
     //Created service to get all user
     List<AddressBook>getListOfAddresses();
+    Object  updateAddressBookData(int id, AddressBookDto addressBookDTO);
 
-    AddressBook updateById(Integer id , AddressBookDto addressBookDTO);
-    Optional<AddressBook> getIdOfAddresses(int id);
-     void deleteContact(Integer id);
+    AddressBook getIdOfAddresses(int id);
+    String deleteContact(Integer id);
 
     List<AddressBook> getContactsByCity(String city);
 
-   List<AddressBook> orderContactsByCity();
+    List<AddressBook> orderContactsByCity();
 
+    List<AddressBook>orderContactByState();
 
 }

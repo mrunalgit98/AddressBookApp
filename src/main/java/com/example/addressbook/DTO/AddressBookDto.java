@@ -12,14 +12,18 @@ import java.util.List;
 
 public class AddressBookDto {
 
-   @Pattern(regexp = "[A-Z]{1}[a-zA-Z]{2,}",message = "Name is Invalid")
+   @Pattern(regexp = "[A-Z]{1}[a-zA-Z]{2,}\s[A-Z]{1}[a-zA-Z]{2,}",message = "Name is Invalid")
     public String name;
     @NotNull(message = "zip cannot be empty")
     public Integer zip;
     @NotEmpty(message = "city cannot be empty")
      public String city;
-//    @Pattern(regexp ="(91-)?[0-9]{10}",message="Phone number is not valid")
-     public Long phone;
+  @Pattern(regexp ="(91-)?[0-9]{10}",message="Phone number is not valid")
+     public String  phone;
+
+//  @Pattern( = [])
      public String email;
+     public String state;
+     public String country;
 
 }

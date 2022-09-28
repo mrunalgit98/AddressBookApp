@@ -4,11 +4,8 @@ import com.example.addressbook.DTO.AddressBookDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
-import org.intellij.lang.annotations.Pattern;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @Entity
@@ -17,27 +14,41 @@ import java.util.List;
 
 public class AddressBook {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "personId")
-    public Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    public Integer personId;
 
     public String name;
-//    @ElementCollection
-//    @CollectionTable(name = "city",joinColumns = @JoinTable(schema = "address_book"))
+
     public String city;
     public Integer zip;
 
-   public Long phone;
-   public String email;
+    public String phone;
+    public String email;
+    public String state;
+    public String country;
 
+    public  AddressBook (AddressBookDto addressBookDto) {
+        this.name=addressBookDto.getName();
+        this.city=addressBookDto.getCity();
+        this.zip=addressBookDto.getZip();
+        this.phone=addressBookDto.getPhone();
+        this.email=addressBookDto.getEmail();
+        this.state=addressBookDto.getState();
+        this.country=addressBookDto.getCountry();
 
-
-    public AddressBook(AddressBookDto addressBookDto) {
-
-        this.name=addressBookDto.name;
-        this.city=addressBookDto.city;
-        this.zip=addressBookDto.zip;
-        this.phone=addressBookDto.phone;
-        this.email=addressBookDto.email;
     }
+
+//    public AddressBook( Integer id) {
+//    }
+
+
+//    public  void AddressBook() {
+//        this.AddressBook();
+//    }
+
+
+
 }
+
+//Save, GetAll, GetById, DeleteById, Update, sortByprice high and low, Solrt by bookName, update bookQuantity,
